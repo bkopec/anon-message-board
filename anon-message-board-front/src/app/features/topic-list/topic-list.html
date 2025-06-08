@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Topics</h2>
+    <button routerLink="/create-topic" class="create-button">Create New Topic</button>
+
+    <div *ngIf="topicsPage().content.length > 0; else noTopics">
+      <ul class="topic-list">
+        <li *ngFor="let topic of topicsPage().content" class="topic-item">
+          <a [routerLink]="['/topic', topic.id]">
+            <h3>{{ topic.subject }}</h3>
+            <p>by {{ topic.posterName }} - {{ topic.createdAt | date:'short' }}</p>
+            <p>{{ topic.repliesCount }} replies | Last post: {{ topic.lastPostAt | date:'short' }}</p>
+          </a>
+        </li>
+      </ul>
+
+      <div class="pagination-controls">
+        <button (click)="goToPage(topicsPage().number - 1)" [disabled]="topicsPage().first">Previous</button>
+        <span>Page {{ topicsPage().number + 1 }} of {{ topicsPage().totalPages }}</span>
+        <button (click)="goToPage(topicsPage().number + 1)" [disabled]="topicsPage().last">Next</button>
+      </div>
+    </div>
+    <ng-template #noTopics>
+      <p>No topics found. Be the first to create one!</p>
+    </ng-template>
+  </div>

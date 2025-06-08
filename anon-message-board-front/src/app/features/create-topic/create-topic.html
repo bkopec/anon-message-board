@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Create New Topic</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="posterName">Your Name:</label>
+        <input id="posterName" type="text" [(ngModel)]="newTopic.posterName" name="posterName" required maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input id="subject" type="text" [(ngModel)]="newTopic.subject" name="subject" required maxlength="255">
+      </div>
+      <div class="form-group">
+        <label for="content">Original Message:</label>
+        <textarea id="content" [(ngModel)]="newTopic.content" name="content" rows="5" required></textarea>
+      </div>
+      <button type="submit" [disabled]="!newTopic.subject || !newTopic.posterName || !newTopic.content">Create Topic</button>
+      <button type="button" (click)="router.navigate(['/'])" class="cancel-button">Cancel</button>
+    </form>
+  </div>

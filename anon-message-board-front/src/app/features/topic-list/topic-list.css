@@ -1,0 +1,90 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.create-button {
+    display: block;
+    width: 200px;
+    margin: 15px auto;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.create-button:hover {
+    background-color: #0056b3;
+}
+
+.topic-list {
+    list-style: none;
+    padding: 0;
+}
+
+.topic-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.topic-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.topic-item a:hover h3 {
+    color: #007bff;
+}
+
+.topic-item h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.topic-item p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.pagination-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-controls span {
+    margin: 0 10px;
+    font-weight: bold;
+}

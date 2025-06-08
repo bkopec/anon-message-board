@@ -1,0 +1,58 @@
+<div class="container">
+    <button (click)="router.navigate(['/'])" class="back-button">Back to Topics</button>
+
+    <div *ngIf="topic() as currentTopic">
+      <h2>{{ currentTopic.subject }}</h2>
+      <p class="topic-meta">Created by {{ currentTopic.posterName }} on {{ currentTopic.createdAt | date:'short' }}</p>
+
+      <ng-container *ngIf="messagesPage().content.length > 0 && messagesPage().number === 0">
+        <div class="original-post">
+          <h3>Original Post</h3>
+          <p><strong>{{ messagesPage().content[0].authorName }}</strong> on {{ messagesPage().content[0].createdAt | date:'short' }}</p>
+          <div class="message-content">{{ messagesPage().content[0].content }}</div>
+        </div>
+        <hr>
+      </ng-container>
+
+
+      <h3>Replies ({{ currentTopic.repliesCount }} total)</h3>
+      <div *ngIf="messagesPage().content.length > (messagesPage().number === 0 ? 1 : 0); else noRepliesYet">
+        <ul class="message-list">
+          <li *ngFor="let message of (messagesPage().number === 0 ? messagesPage().content.slice(1) : messagesPage().content); let i = index" class="message-item">
+            <strong>{{ message.authorName }}</strong> on {{ message.createdAt | date:'short' }}
+            <p>{{ message.content }}</p>
+          </li>
+        </ul>
+
+        <div class="pagination-controls">
+          <button (click)="goToMessagePage(messagesPage().number - 1)" [disabled]="messagesPage().first">Previous</button>
+          <span>Page {{ messagesPage().number + 1 }} of {{ messagesPage().totalPages }}</span>
+          <button (click)="goToMessagePage(messagesPage().number + 1)" [disabled]="messagesPage().last">Next</button>
+        </div>
+      </div>
+      <ng-template #noRepliesYet>
+        <p *ngIf="messagesPage().content.length === 0">No messages yet. Be the first to reply!</p>
+        <p *ngIf="messagesPage().content.length === 1 && messagesPage().number === 0">No replies yet. Be the first to add one!</p>
+        <p *ngIf="messagesPage().content.length === 0 && messagesPage().number > 0">No replies found on this page.</p>
+      </ng-template>
+
+
+      <hr>
+
+      <h3>Add a Reply</h3>
+      <form (ngSubmit)="addReply()">
+        <div class="form-group">
+          <label for="authorName">Your Name:</label>
+          <input id="authorName" type="text" [(ngModel)]="newMessage.authorName" name="authorName" required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label for="content">Message:</label>
+          <textarea id="content" [(ngModel)]="newMessage.content" name="content" rows="5" required></textarea>
+        </div>
+        <button type="submit" [disabled]="!newMessage.authorName || !newMessage.content">Post Reply</button>
+      </form>
+    </div>
+    <div *ngIf="!topic()">
+      <p>Loading topic...</p>
+    </div>
+  </div>
